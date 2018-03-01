@@ -1,17 +1,19 @@
 <ion-header>
-  <!-- <ion-navbar>
+  <!-- 
+  <ion-navbar>
      <button ion-button menuToggle right>
         <ion-icon name="menu"></ion-icon>
       </button>
     <ion-title>USA-Marbles</ion-title>
-  </ion-navbar> -->
+  </ion-navbar> 
+  -->
   <header title="USA-Marbles"></header>
 </ion-header>
 
 <ion-content padding>
-  <ion-list>
-    <ion-item  [@state]="state" *ngFor="let post of posts; let i=index;" (click)="getDetails(post)">
-        {{ post.name }}
+  <ion-list >
+    <ion-item [@flyInOut]="state" *ngFor="let post of posts; let i=index;" (click)="getDetails(post)">
+      {{ post.name }}
     </ion-item>
   </ion-list>
 </ion-content>

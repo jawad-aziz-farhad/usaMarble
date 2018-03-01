@@ -9,39 +9,50 @@ import {
   state,
   style,
   animate,
-  transition
+  stagger,
+  query,
+  transition,
+  keyframes
 } from '@angular/animations';
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
   animations: [
-    trigger('state', [
-      state('inactive', style({
-        backgroundColor: '#eee',
-        transform: 'scale(1)'
-      })),
-      state('active',   style({
-        backgroundColor: '#cfd8dc',
-        transform: 'scale(1.1)'
-      })),
-      transition('inactive => active', animate('100ms ease-in')),
-      transition('active => inactive', animate('100ms ease-out'))
+    trigger('flyInOut', [
+      transition('* => in', [
+        animate('0.2s 100ms ease-in', keyframes([
+          style({opacity: 0,  transform: 'translateX(-100%)', offset: 0}),
+          style({opacity: .5, transform: 'translateX(15px)',  offset: 0.3}),
+          style({opacity: 1,  transform: 'translateX(0)',     offset: 1.0})
+        ])),
+      ]),
+      transition('* => out', [
+        animate('.6s ease-out', keyframes([
+          style({opacity: 1,  transform: 'translateX(0)',     offset: 0}),
+          style({opacity: .5, transform: 'translateX(-15px)', offset: 0.7}),
+          style({opacity: 0,  transform: 'translateX(100%)',  offset: 1.0})
+        ]))
+      ])
     ])
   ]
 })
+
 export class HomePage {
 
   private posts: Post[] = [];
-  private state: string;
-  
+  private next: number = 0;
+  private state: string = '';
   constructor(public navCtrl: NavController) {
     this.init();
   }
+
+  ionViewWillEnter(){
+    this.state = 'in';
+  }
+  
   /* INITIALIZING WITH DATA */
   init(){
-    this.state = 'inactive';
-
     for(let i=0;i<5;i++){
       let post = { id: null, name: null, date: null};
       post.id = i;
@@ -53,10 +64,11 @@ export class HomePage {
 
   /* GETTING DETAILS OF SELECTED POST */
   getDetails(post){
-    this.state = this.state === 'active' ? 'inactive' : 'active';
+    this.state = 'out';
+
     setTimeout(() => {
       this.navCtrl.push(DetailsPage, { post: post})
-    }, 1000);
+    }, 250);
     
   }
 
