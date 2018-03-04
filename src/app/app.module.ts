@@ -13,6 +13,7 @@ import { DetailsPage } from '../pages/details/details';
 /* PLUGINS */
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { MenuState} from '../providers/menu-state/menu-state';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    MenuState
   ]
 })
 export class AppModule {}

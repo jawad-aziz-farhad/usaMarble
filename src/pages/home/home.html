@@ -12,7 +12,7 @@
 
 <ion-content padding>
   <ion-list >
-    <ion-item [@flyInOut]="state" *ngFor="let post of posts; let i=index;" (click)="getDetails(post)">
+    <ion-item [@flyInOut]="state"  *ngFor="let post of posts; let i=index;" (click)="getDetails(post)">
       {{ post.name }}
     </ion-item>
   </ion-list>

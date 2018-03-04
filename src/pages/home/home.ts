@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Post } from '../../models/posts.interface';
 import { DetailsPage } from '../details/details';
-
-
 import {
   trigger,
   state,
@@ -12,7 +10,8 @@ import {
   stagger,
   query,
   transition,
-  keyframes
+  keyframes,
+  group
 } from '@angular/animations';
 
 @Component({
@@ -28,9 +27,9 @@ import {
         ])),
       ]),
       transition('* => out', [
-        animate('.6s ease-out', keyframes([
+        animate('0.6s 0.3s ease-out', keyframes([
           style({opacity: 1,  transform: 'translateX(0)',     offset: 0}),
-          style({opacity: .5, transform: 'translateX(-15px)', offset: 0.7}),
+          style({opacity: .5, transform: 'translateX(-75px)', offset: 0.7}),
           style({opacity: 0,  transform: 'translateX(100%)',  offset: 1.0})
         ]))
       ])
@@ -42,7 +41,7 @@ export class HomePage {
 
   private posts: Post[] = [];
   private next: number = 0;
-  private state: string = '';
+  private state: string = 'in';
   constructor(public navCtrl: NavController) {
     this.init();
   }
