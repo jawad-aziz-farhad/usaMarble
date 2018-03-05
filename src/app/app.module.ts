@@ -17,6 +17,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { MenuState} from '../providers/menu-state/menu-state';
 import { Search } from '../providers/search/search';
+import { Parse } from '../providers/parse/parse';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { Search } from '../providers/search/search';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     MenuState,
-    Search
+    Search,
+    Parse
   ]
 })
 export class AppModule {}

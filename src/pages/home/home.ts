@@ -20,18 +20,6 @@ import { Search } from '../../providers';
   selector: 'page-home',
   templateUrl: 'home.html',
   animations: [
-    trigger('img', [
-      state('show', style({ transform: 'scale(1)'})),
-      state('hide', style({ transform: 'scale(0)'})),
-
-      transition('* => show', [
-        style({transform: 'translateY(-55px)', offset: 0.3})
-      ]),
-      transition('* => hide', [
-        style({transform: 'translateY(100%)', offset: 0.5})
-      ]),
-    ]),
-
     trigger('flyInOut', [
       transition('* => in', [
         animate('0.2s 100ms ease-in', keyframes([
@@ -54,25 +42,26 @@ import { Search } from '../../providers';
 export class HomePage {
 
   private posts: Post[] = [];
-  private data = [  {id: 1, name: 'Bisque', image: 'assets/imgs/bisque.jpeg' , price: '$100'},
-                    {id: 2, name: 'Champagne', image: 'assets/imgs/champagne.jpeg' , price: '$150'},
-                    {id: 3, name: 'Coco Emperador', image: 'assets/imgs/coco-emperador.jpeg' , price: '$200'},
-                    {id: 4, name: 'Dark Emperador', image: 'assets/imgs/dark-emperador.jpeg' , price: '$300'},
-                    {id: 5, name: 'Iridium', image: 'assets/imgs/iridium.jpeg' , price: '$350'},
-                    {id: 6, name: 'Ihasa', image: 'assets/imgs/ihasa.jpeg' , price: '$400'},
-                    {id: 7, name: 'Melange Venetian', image: 'assets/imgs/melange-venetian.jpeg' , price: '$500'},
-                    {id: 8, name: 'Melange', image: 'assets/imgs/melange.jpeg' , price: '$200'},
-                    {id: 9, name: 'Milano Beige', image: 'assets/imgs/milano-beige.jpeg' , price: '$600'},
-                    {id: 10, name: 'Polar White', image: 'assets/imgs/polar-white.jpeg' , price: '$650'},
-                    {id: 11, name: 'Swiss Blanco', image: 'assets/imgs/swiss-blanco.jpeg' , price: '$300'},
-                    {id: 12, name: 'Vanilla Sky', image: 'assets/imgs/vanilla-sky.jpeg' , price: '$450'}
+  private data = [  {id: 1, name: 'Bisque', image: 'assets/imgs/bisque.jpg' , price: '$100'},
+                    {id: 2, name: 'Champagne', image: 'assets/imgs/champagne.jpg' , price: '$150'},
+                    {id: 3, name: 'Coco Emperador', image: 'assets/imgs/coco-emperador.jpg' , price: '$200'},
+                    {id: 4, name: 'Dark Emperador', image: 'assets/imgs/dark-emperador.jpg' , price: '$300'},
+                    {id: 5, name: 'Iridium', image: 'assets/imgs/iridium.jpg' , price: '$350'},
+                    {id: 6, name: 'Lhasa', image: 'assets/imgs/lhasa.jpg' , price: '$400'},
+                    {id: 7, name: 'Melange Venetian', image: 'assets/imgs/melange-venetian.jpg' , price: '$500'},
+                    {id: 8, name: 'Melange', image: 'assets/imgs/melange.jpg' , price: '$200'},
+                    {id: 9, name: 'Milano Beige', image: 'assets/imgs/milano-beige.jpg' , price: '$600'},
+                    {id: 10, name: 'Polar White', image: 'assets/imgs/polar-white.jpg' , price: '$650'},
+                    {id: 11, name: 'Swiss Blanco', image: 'assets/imgs/swiss-blanco.jpg' , price: '$300'},
+                    {id: 12, name: 'Vanilla Sky', image: 'assets/imgs/vanilla-sky.jpg' , price: '$450'}
                     ];
   private next: number = 0;
   private state: string = 'in';
+  private selected: string = '';
   private isSearching: boolean = false;
   private searchInput: any; 
   private tempPosts: Post[] = [];         
-  
+                  
   constructor(public navCtrl: NavController,
               public search: Search) {
     this.init();
@@ -101,7 +90,9 @@ export class HomePage {
   /* GETTING DETAILS OF SELECTED POST */
   getDetails(post){
     this.state = 'out';
-
+    let selectedPost = post;
+    if(selectedPost.id == post.id)
+      this.selected = 'selected';
     setTimeout(() => {
       this.navCtrl.push(DetailsPage, { post: post})
     }, 250);

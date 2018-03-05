@@ -1,5 +1,6 @@
 import { Component, Input, Output , EventEmitter} from '@angular/core';
 import { MenuController } from 'ionic-angular';
+import { Parse } from '../../providers';
 
 /**
  * Generated class for the HeaderComponent component.
@@ -16,7 +17,8 @@ export class HeaderComponent {
   @Input()title: string;
   @Output()search = new EventEmitter<any>();
 
-  constructor(private menuCtrl: MenuController) {
+  constructor(private menuCtrl: MenuController,
+              private parse: Parse) {
     console.log('Hello HeaderComponent Component');
   }
 
