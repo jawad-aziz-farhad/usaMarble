@@ -1,3 +1,18 @@
 page-home {
 
+    button {
+        ion-icon {
+            font-size: 22px;
+            @media (min-width:768px) {
+                font-size: 30px;
+            }
+        }
+    }
+
+    ion-avatar:hover img{
+        -webkit-transform: scale3d(1.5, 1.5, 1);
+                transform: scale3d(1.5, 1.5, 1);
+    }
+
+
 }

@@ -2,8 +2,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-import {  ComponentsModule } from '../components/components.module';
+import { ComponentsModule } from '../components/components.module';
+import { DirectivesModule } from '../directives/directives.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ImageZoomModule } from 'angular2-image-zoom';
 
 /* ENTRY POINT OF APP */
 import { MyApp } from './app.component';
@@ -13,6 +15,8 @@ import { DetailsPage } from '../pages/details/details';
 /* PLUGINS */
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { MenuState} from '../providers/menu-state/menu-state';
+import { Search } from '../providers/search/search';
 
 @NgModule({
   declarations: [
@@ -22,8 +26,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   ],
   imports: [
     BrowserModule,
+    DirectivesModule,
     BrowserAnimationsModule,
     ComponentsModule,
+    ImageZoomModule,
     IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],
@@ -35,7 +41,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    MenuState,
+    Search
   ]
 })
 export class AppModule {}

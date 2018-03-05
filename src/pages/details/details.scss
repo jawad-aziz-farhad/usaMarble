@@ -1,3 +1,11 @@
 page-details {
 
+    ion-footer {
+          padding-left: 10px !important; 
+          padding-right: 10px !important;
+          @media (min-width: 768px) {
+              padding-left: 15px !important;
+              padding-right: 15px !important;
+            }
+    }
 }

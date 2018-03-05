@@ -1,19 +1,26 @@
 <ion-header>
-  <!-- 
-  <ion-navbar>
-     <button ion-button menuToggle right>
-        <ion-icon name="menu"></ion-icon>
-      </button>
-    <ion-title>USA-Marbles</ion-title>
-  </ion-navbar> 
-  -->
-  <header title="USA-Marbles"></header>
+  <header title="Products" (search)="isSearching = !isSearching"></header>
+  <ion-toolbar *ngIf="isSearching">
+      <ion-searchbar
+      [class.has-content]="!!searchInput"
+      [(ngModel)]="searchInput"
+      [showCancelButton]="true"
+      [animated]="true"
+      (ionInput)="onSearchInput()"
+      (ionCancel)="isSearching = !isSearching">
+    </ion-searchbar>
+  </ion-toolbar>
+
 </ion-header>
 
-<ion-content padding>
-  <ion-list >
-    <ion-item [@inOut]="state" (mouseenter)="mouseHover($event)" (mouseLeave)="mouseLeave($event)" *ngFor="let post of posts; let i=index;" (click)="getDetails(post)">
-      {{ post.name }}
+<ion-content>
+  <ion-list>
+    <ion-item [@flyInOut]="state" *ngFor="let post of posts; let i=index;" (click)="getDetails(post)">
+      <ion-avatar highlight item-start>
+        <img [src]="post.image">
+      </ion-avatar>
+      <h2>{{ post.name }}</h2>
+      <p>Price: {{ post.price }}</p>
     </ion-item>
   </ion-list>
 </ion-content>

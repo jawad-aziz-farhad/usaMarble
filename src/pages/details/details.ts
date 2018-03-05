@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Post } from '../../models/posts.interface';
+import { Post } from '../../models';
+import { Shop, Parse } from '../../classes';
+
 /**
  * Generated class for the DetailsPage page.
  *
@@ -27,6 +29,14 @@ export class DetailsPage {
   ionViewWillEnter(){
     this.post = this.navParams.get('post');
     console.log("SELECTED POST IS: "+ JSON.stringify(this.post));
+  }
+
+  addtoCart(){
+    let shop = new Shop();
+    shop.setAll(this.post);
+    let parse = new Parse();
+   
+
   }
 
 }

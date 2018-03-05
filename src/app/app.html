@@ -1,5 +1,5 @@
 <ion-menu side="right" [content]="content">
-  <ion-header>
+  <ion-header color="primary">
     <ion-toolbar>
       <ion-title>Menu</ion-title>
     </ion-toolbar>
@@ -7,7 +7,7 @@
 
   <ion-content>
     <ion-list>
-      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+      <button [@slide]="menuState" (@slide.start)="animationStarted($event)" (@slide.done)="animationDone($event)" menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
         {{p.title}}
       </button>
     </ion-list>

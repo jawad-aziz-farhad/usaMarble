@@ -1,20 +1,31 @@
 <!-- Generated template for the HeaderComponent component -->
-<ion-navbar>
+<ion-navbar color="primary">
  <ion-buttons end>
+
     <button ion-button icon-only>
-      <ion-icon name="search"></ion-icon>
+      <ion-icon ios="ios-cart" md="md-cart"></ion-icon>
     </button>
+
+    <button ion-button icon-only (click)="onSearch()">
+      <ion-icon ios="ios-search" md="md-search"></ion-icon>
+    </button>
+
+    <!-- <button ion-button icon-only (click)="menuOpen()" >
+      <ion-icon name="menu"></ion-icon>
+    </button> -->
     
   </ion-buttons> 
      
-  <button ion-button icon-only menuToggle right>
-    <ion-icon name="menu"></ion-icon>
-  </button>
+  
   
   <ion-title>
     <img alt="logo" height="24" src="assets/imgs/logo.png" > 
     {{ title }}
   </ion-title>
+
+  <button ion-button icon-only menuToggle right>
+    <ion-icon name="menu"></ion-icon>
+  </button>
 </ion-navbar>
 
 <!-- <ion-toolbar>

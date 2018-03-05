@@ -1,23 +1,83 @@
-import { Component , HostListener , AnimationTransitionEvent } from '@angular/core';
+import { Component  , AnimationTransitionEvent } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Post } from '../../models/posts.interface';
 import { DetailsPage } from '../details/details';
-import { HoverContainerAnimations , InOutAnimation } from '../../animations';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  stagger,
+  query,
+  transition,
+  keyframes,
+  group
+} from '@angular/animations';
+
+import { Search } from '../../providers';
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
-  animations: InOutAnimation
+  animations: [
+    trigger('img', [
+      state('show', style({ transform: 'scale(1)'})),
+      state('hide', style({ transform: 'scale(0)'})),
+
+      transition('* => show', [
+        style({transform: 'translateY(-55px)', offset: 0.3})
+      ]),
+      transition('* => hide', [
+        style({transform: 'translateY(100%)', offset: 0.5})
+      ]),
+    ]),
+
+    trigger('flyInOut', [
+      transition('* => in', [
+        animate('0.2s 100ms ease-in', keyframes([
+          style({opacity: 0,  transform: 'translateX(-100%)', offset: 0}),
+          style({opacity: .5, transform: 'translateX(15px)',  offset: 0.3}),
+          style({opacity: 1,  transform: 'translateX(0)',     offset: 1.0})
+        ])),
+      ]),
+      transition('* => out', [
+        animate('0.6s 0.3s ease-out', keyframes([
+          style({opacity: 1,  transform: 'translateX(0)',     offset: 0}),
+          style({opacity: .5, transform: 'translateX(-75px)', offset: 0.7}),
+          style({opacity: 0,  transform: 'translateX(100%)',  offset: 1.0})
+        ]))
+      ])
+    ])
+  ]
 })
 
 export class HomePage {
 
   private posts: Post[] = [];
+  private data = [  {id: 1, name: 'Bisque', image: 'assets/imgs/bisque.jpeg' , price: '$100'},
+                    {id: 2, name: 'Champagne', image: 'assets/imgs/champagne.jpeg' , price: '$150'},
+                    {id: 3, name: 'Coco Emperador', image: 'assets/imgs/coco-emperador.jpeg' , price: '$200'},
+                    {id: 4, name: 'Dark Emperador', image: 'assets/imgs/dark-emperador.jpeg' , price: '$300'},
+                    {id: 5, name: 'Iridium', image: 'assets/imgs/iridium.jpeg' , price: '$350'},
+                    {id: 6, name: 'Ihasa', image: 'assets/imgs/ihasa.jpeg' , price: '$400'},
+                    {id: 7, name: 'Melange Venetian', image: 'assets/imgs/melange-venetian.jpeg' , price: '$500'},
+                    {id: 8, name: 'Melange', image: 'assets/imgs/melange.jpeg' , price: '$200'},
+                    {id: 9, name: 'Milano Beige', image: 'assets/imgs/milano-beige.jpeg' , price: '$600'},
+                    {id: 10, name: 'Polar White', image: 'assets/imgs/polar-white.jpeg' , price: '$650'},
+                    {id: 11, name: 'Swiss Blanco', image: 'assets/imgs/swiss-blanco.jpeg' , price: '$300'},
+                    {id: 12, name: 'Vanilla Sky', image: 'assets/imgs/vanilla-sky.jpeg' , price: '$450'}
+                    ];
   private next: number = 0;
-  private state: string = '';
-  constructor(public navCtrl: NavController) {
+  private state: string = 'in';
+  private isSearching: boolean = false;
+  private searchInput: any; 
+  private tempPosts: Post[] = [];         
+  
+  constructor(public navCtrl: NavController,
+              public search: Search) {
     this.init();
   }
+
 
   ionViewWillEnter(){
     this.state = 'in';
@@ -25,13 +85,17 @@ export class HomePage {
   
   /* INITIALIZING WITH DATA */
   init(){
-    for(let i=0;i<5;i++){
-      let post = { id: null, name: null, date: null};
-      post.id = i;
-      post.name = 'Post ' + (i + 1);
+    for(let i=0;i<this.data.length;i++){
+      let post = { id: null, name: null,image: null, price: null, date: null};
+      post.id = this.data[i].id;
+      post.name = this.data[i].name;
+      post.image = this.data[i].image;
+      post.price = this.data[i].price;
       post.date = new Date().getDate();
       this.posts.push(post);
     }
+
+    this.tempPosts = this.posts;
   }
 
   /* GETTING DETAILS OF SELECTED POST */
@@ -43,13 +107,11 @@ export class HomePage {
     }, 250);
   }
 
-  mouseHover(event){
-    this.state = 'hover';
+  /* WHEN USER TYPES TO SEARCH */ 
+  onSearchInput(): any{
+    if(this.searchInput)
+      this.posts = this.search.search_Item(this.posts, this.searchInput);
+    else
+      this.posts = this.tempPosts;
   }
-
-  mouseLeave(event){
-    this.state = 'in';
-  }
-
-
 }

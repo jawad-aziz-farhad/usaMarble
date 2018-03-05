@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output , EventEmitter} from '@angular/core';
 import { MenuController } from 'ionic-angular';
 
 /**
@@ -10,18 +10,21 @@ import { MenuController } from 'ionic-angular';
 @Component({
   selector: 'header',
   templateUrl: 'header.html',
-  
-})
+ })
 export class HeaderComponent {
 
   @Input()title: string;
-  
+  @Output()search = new EventEmitter<any>();
+
   constructor(private menuCtrl: MenuController) {
     console.log('Hello HeaderComponent Component');
   }
 
-  openMenu(){
+  menuOpen(){
     this.menuCtrl.open();
   }
 
+  onSearch(){
+    this.search.emit('search');
+  }
 }
