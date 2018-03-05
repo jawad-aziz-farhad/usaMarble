@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { MenuController } from 'ionic-angular';
 
 /**
  * Generated class for the HeaderComponent component.
@@ -8,14 +9,19 @@ import { Component, Input } from '@angular/core';
  */
 @Component({
   selector: 'header',
-  templateUrl: 'header.html'
+  templateUrl: 'header.html',
+  
 })
 export class HeaderComponent {
 
   @Input()title: string;
-
-  constructor() {
+  
+  constructor(private menuCtrl: MenuController) {
     console.log('Hello HeaderComponent Component');
+  }
+
+  openMenu(){
+    this.menuCtrl.open();
   }
 
 }

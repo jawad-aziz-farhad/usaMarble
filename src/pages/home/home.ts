@@ -1,41 +1,13 @@
-import { Component } from '@angular/core';
+import { Component , HostListener , AnimationTransitionEvent } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Post } from '../../models/posts.interface';
 import { DetailsPage } from '../details/details';
-
-
-import {
-  trigger,
-  state,
-  style,
-  animate,
-  stagger,
-  query,
-  transition,
-  keyframes
-} from '@angular/animations';
+import { HoverContainerAnimations , InOutAnimation } from '../../animations';
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
-  animations: [
-    trigger('flyInOut', [
-      transition('* => in', [
-        animate('0.2s 100ms ease-in', keyframes([
-          style({opacity: 0,  transform: 'translateX(-100%)', offset: 0}),
-          style({opacity: .5, transform: 'translateX(15px)',  offset: 0.3}),
-          style({opacity: 1,  transform: 'translateX(0)',     offset: 1.0})
-        ])),
-      ]),
-      transition('* => out', [
-        animate('.6s ease-out', keyframes([
-          style({opacity: 1,  transform: 'translateX(0)',     offset: 0}),
-          style({opacity: .5, transform: 'translateX(-15px)', offset: 0.7}),
-          style({opacity: 0,  transform: 'translateX(100%)',  offset: 1.0})
-        ]))
-      ])
-    ])
-  ]
+  animations: InOutAnimation
 })
 
 export class HomePage {
@@ -69,7 +41,15 @@ export class HomePage {
     setTimeout(() => {
       this.navCtrl.push(DetailsPage, { post: post})
     }, 250);
-    
   }
+
+  mouseHover(event){
+    this.state = 'hover';
+  }
+
+  mouseLeave(event){
+    this.state = 'in';
+  }
+
 
 }
