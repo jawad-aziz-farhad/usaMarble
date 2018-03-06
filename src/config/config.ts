@@ -1,0 +1,1 @@
+export let ERROR = "Something went wrong.";

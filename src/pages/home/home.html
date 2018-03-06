@@ -1,5 +1,5 @@
 <ion-header>
-  <header title="Products" (search)="isSearching = !isSearching"></header>
+  <header title="Products" [isSearching]="isSearching" (search)="isSearching = !isSearching"></header>
   <ion-toolbar *ngIf="isSearching">
       <ion-searchbar
       [class.has-content]="!!searchInput"
@@ -15,7 +15,7 @@
 
 <ion-content>
   <ion-list>
-    <ion-item [@flyInOut]="'in'" *ngFor="let post of posts; let i=index;" (click)="getDetails(post)">
+    <ion-item [@flyInOut]="state" *ngFor="let post of posts; let i=index;" (click)="getDetails(post)">
       <ion-avatar highlight item-start>
         <img [src]="post.image">
       </ion-avatar>

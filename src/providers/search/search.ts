@@ -10,14 +10,12 @@ import { Injectable } from '@angular/core';
 export class Search {
 
   constructor() {
-    console.log('Hello SearchProvider Provider');
+    console.log('Hello Search Provider');
   }
 
   search_Item(data, searchTerm){
     return data.filter((item) => {
-      console.log("ITEM IS: "+ JSON.stringify(item));
       return item.name.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1;
     }); 
   }
-
 }

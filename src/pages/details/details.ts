@@ -20,9 +20,14 @@ export class DetailsPage {
 
   private post: Post;
 
+  private orderDate: any;
+  private deliveryDate: any;
+  private quantity: number;
+
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
-              public parse: Parse) {
+              public parse: Parse) { 
+    this.init();                
   }
 
   ionViewDidLoad() {
@@ -30,18 +35,30 @@ export class DetailsPage {
   }
 
   ionViewWillEnter(){
-    this.post = this.navParams.get('post');
-    console.log("SELECTED POST IS: "+ JSON.stringify(this.post));
   }
 
+  init(){
+    this.post = this.navParams.get('post');
+    console.log("SELECTED POST: "+ JSON.stringify(this.post));
+    if(this.post.quantity)
+      this.quantity = this.post.quantity;
+    else
+      this.quantity = 1;  
+    this.getDates(); 
+  }
+
+  
   addtoCart(){
     if(!this.checkStatus()){
      this.setData();
     }
     else{
       let index = this.parse.getData().indexOf(this.post);
-      if(index > -1)
+      if(index > -1){
+        this.parse.getData()[index].quantity = null;
+        this.parse.getData()[index].cartPrice = null;
         this.parse.getData().splice(index, 1);
+      }
       else
         this.setData();  
     }
@@ -51,8 +68,14 @@ export class DetailsPage {
   setData(){
     let shop = new Shop();
     shop.setAll(this.post);
+    let price = this.post.price * this.quantity;
+    shop.getAll().cartPrice = price;
+    shop.getAll().quantity = this.quantity;
+    shop.getAll().order_date = this.orderDate;
+    shop.getAll().delivery_date = this.deliveryDate;
     this.parse.setData(shop.getAll());
   }
+  
   checkStatus(){
     if(this.parse.getData()){
       if(this.parse.getData().indexOf(this.post) > -1)
@@ -62,7 +85,28 @@ export class DetailsPage {
     }
     else
       return false;
-
-
   }
+
+  convertType(val){
+    return +(val);
+  }
+
+  getDates(){
+    let date: Date = new Date();
+    let year  = date.getFullYear();
+    let month = this.pad(date.getMonth() + 1);
+    let day   = this.pad(date.getDate());
+    this.orderDate  = `${year}` + '-' + `${month}` + '-' + `${day}`;
+    day = parseInt(day) + 7;
+    this.deliveryDate = `${year}` + '-' + `${month}` + '-' + `${day}`;
+  }
+
+  /* CHECKING THE NUMBER AND ADDING ZERO IF NUMBER IS LESS THAN 10 */
+  pad(number) {
+    if(!number)
+      return '00';
+    else
+      return (number < 10) ? ("0" + number) : number;
+ }
+
 }

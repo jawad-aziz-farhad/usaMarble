@@ -20,6 +20,27 @@
         <p>
           {{ post?.description ? post.description : 'Some Description about the product goes here.'}}
         </p>
+
+        <ion-item no-padding>
+          <ion-label>Price:</ion-label>
+          <input type="text" item-end [value]="(convertType(post?.price)) * (convertType(quantity))" disabled />
+        </ion-item>
+
+        <ion-item no-padding>
+          <ion-label>Quantity:</ion-label>
+          <input type="number" [value]="quantity" [(ngModel)]="quantity" item-end/>
+        </ion-item>  
+
+        <ion-item no-padding>
+          <ion-label>Order Date:</ion-label>
+          <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="orderDate" disabled></ion-datetime>
+        </ion-item>
+
+        <ion-item no-padding>
+          <ion-label>Delivery Date:</ion-label>
+          <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="deliveryDate" disabled></ion-datetime>
+        </ion-item>
+
       </ion-card-content>
   </ion-card>
 

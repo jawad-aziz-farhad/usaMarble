@@ -1,8 +1,8 @@
 <!-- Generated template for the HeaderComponent component -->
-<ion-navbar color="primary">
+<ion-navbar color="primary" *ngIf="!isSearching">
  <ion-buttons end>
 
-    <button ion-button icon-only>
+    <button ion-button icon-only (click)="showCartItems()" [disabled]="parse.getData()?.length == 0">
       <ion-badge color="accent">{{ parse.getData()?.length }}</ion-badge>
       <ion-icon ios="ios-cart" md="md-cart"></ion-icon>
     </button>
