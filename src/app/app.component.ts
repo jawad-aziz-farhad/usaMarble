@@ -34,7 +34,7 @@ import { MenuState } from '../providers/menu-state/menu-state';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = SlidesPage;
+  rootPage: any = HomePage;
 
   pages: Array<{title: string, component: any}>;
 

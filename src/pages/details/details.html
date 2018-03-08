@@ -47,7 +47,7 @@
 </ion-content>
 
 <ion-footer>
-  <button ion-button full icon-left (click)="addtoCart()">
+  <button ion-button full icon-left (click)="addtoCart()" [disabled]="!quantity">
     <ion-icon ios="ios-cart" md="md-cart"></ion-icon>
     {{ checkStatus() ? 'Remove from Cart' : 'Add to Cart' }}
   </button>

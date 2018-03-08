@@ -51,6 +51,7 @@ export class DetailsPage {
   addtoCart(){
     if(!this.checkStatus()){
      this.setData();
+     this.navCtrl.pop();
     }
     else{
       let index = this.parse.getData().indexOf(this.post);
@@ -59,10 +60,14 @@ export class DetailsPage {
         this.parse.getData()[index].cartPrice = null;
         this.parse.getData().splice(index, 1);
       }
-      else
+      else{
         this.setData();  
+        this.navCtrl.pop();
+      }
     }
+
     console.log("ALL DATA: "+ JSON.stringify(this.parse.getData()));
+    
   }
 
   setData(){

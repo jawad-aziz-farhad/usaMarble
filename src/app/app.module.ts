@@ -13,13 +13,15 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { DetailsPage } from '../pages/details/details';
 import { PdfViewerPage } from '../pages/pdf-viewer/pdf-viewer';
+import { CartItemsPage } from '../pages/cart-items/cart-items';
 import { SlidesPage } from '../pages/slides/slides';
 
 /* PLUGINS */
 import { StatusBar } from '@ionic-native/status-bar';
+import { SplashScreen } from '@ionic-native/splash-screen';
 import { File } from '@ionic-native/file';
-import { FileOpener } from '@ionic-native/file-opener';import { SplashScreen } from '@ionic-native/splash-screen';
-//import { EmailComposer } from '@ionic-native/email-composer';
+import { FileOpener } from '@ionic-native/file-opener';
+import { EmailComposer } from '@ionic-native/email-composer';
 
 /* PROVIDERS */
 import { MenuState} from '../providers/menu-state/menu-state';
@@ -32,7 +34,8 @@ import { Parse } from '../providers/parse/parse';
     HomePage,
     DetailsPage,
     PdfViewerPage,
-    SlidesPage
+    SlidesPage,
+    CartItemsPage
   ],
   imports: [
     BrowserModule,
@@ -48,13 +51,15 @@ import { Parse } from '../providers/parse/parse';
     HomePage,
     DetailsPage,
     PdfViewerPage,
-    SlidesPage
+    SlidesPage,
+    CartItemsPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     File,
     FileOpener,
+    EmailComposer,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     MenuState,
     Search,

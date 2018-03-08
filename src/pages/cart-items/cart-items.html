@@ -49,11 +49,14 @@
     </ion-item>
 
   <ion-item>
-    <button ion-button icon-left clear item-end color="danger">
+    <button ion-button icon-left clear item-end color="danger" (click)="removeConfirmation()">
       <ion-icon name="ion-trash-outline"></ion-icon>
       Remove 
     </button>
   </ion-item>
-  
   </ion-card>
 </ion-content>
+
+<ion-footer>
+  <button ion-button full (click)="createPDF()" [disabled]="parse.getData().length == 0">Create PDF</button>
+</ion-footer>

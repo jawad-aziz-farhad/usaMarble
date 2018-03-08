@@ -4,6 +4,7 @@ import { Parse } from '../../providers';
 import { Modal } from '../../classes';
 import { ERROR } from '../../config/config';
 import { PdfViewerPage } from '../../pages/pdf-viewer/pdf-viewer';
+import { CartItemsPage } from '../../pages/cart-items/cart-items';
 /**
  * Generated class for the HeaderComponent component.
  *
@@ -36,7 +37,9 @@ export class HeaderComponent extends Modal {
   }
 
   showCartItems(){
-    this.navCtrl.push(PdfViewerPage);
+    //this.navCtrl.push(PdfViewerPage);
+    this.navCtrl.push(CartItemsPage);
+    
     // this.openModal('CartItemsPage', null).subscribe(result => {
     //   console.log("RESULT: "+ JSON.stringify(result));
     // },
