@@ -12,9 +12,16 @@ import { MyApp } from './app.component';
 /* PAGES */
 import { HomePage } from '../pages/home/home';
 import { DetailsPage } from '../pages/details/details';
+import { PdfViewerPage } from '../pages/pdf-viewer/pdf-viewer';
+import { SlidesPage } from '../pages/slides/slides';
+
 /* PLUGINS */
 import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
+import { File } from '@ionic-native/file';
+import { FileOpener } from '@ionic-native/file-opener';import { SplashScreen } from '@ionic-native/splash-screen';
+//import { EmailComposer } from '@ionic-native/email-composer';
+
+/* PROVIDERS */
 import { MenuState} from '../providers/menu-state/menu-state';
 import { Search } from '../providers/search/search';
 import { Parse } from '../providers/parse/parse';
@@ -23,7 +30,9 @@ import { Parse } from '../providers/parse/parse';
   declarations: [
     MyApp,
     HomePage,
-    DetailsPage
+    DetailsPage,
+    PdfViewerPage,
+    SlidesPage
   ],
   imports: [
     BrowserModule,
@@ -37,11 +46,15 @@ import { Parse } from '../providers/parse/parse';
   entryComponents: [
     MyApp,
     HomePage,
-    DetailsPage
+    DetailsPage,
+    PdfViewerPage,
+    SlidesPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
+    File,
+    FileOpener,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     MenuState,
     Search,

@@ -1,8 +1,9 @@
 import { Component, Input, Output , EventEmitter} from '@angular/core';
-import { MenuController , ModalController} from 'ionic-angular';
+import { MenuController , ModalController , NavController } from 'ionic-angular';
 import { Parse } from '../../providers';
 import { Modal } from '../../classes';
 import { ERROR } from '../../config/config';
+import { PdfViewerPage } from '../../pages/pdf-viewer/pdf-viewer';
 /**
  * Generated class for the HeaderComponent component.
  *
@@ -21,6 +22,7 @@ export class HeaderComponent extends Modal {
 
   constructor(private menuCtrl: MenuController,
               protected modalCtrl: ModalController,
+              private navCtrl: NavController,
               private parse: Parse) {
     super(modalCtrl);         
   }
@@ -34,9 +36,10 @@ export class HeaderComponent extends Modal {
   }
 
   showCartItems(){
-    this.openModal('CartItemsPage', null).subscribe(result => {
-      console.log("RESULT: "+ JSON.stringify(result));
-    },
-    error => console.error(ERROR));
+    this.navCtrl.push(PdfViewerPage);
+    // this.openModal('CartItemsPage', null).subscribe(result => {
+    //   console.log("RESULT: "+ JSON.stringify(result));
+    // },
+    // error => console.error(ERROR));
   }
 }
